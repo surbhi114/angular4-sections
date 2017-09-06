@@ -1,0 +1,81 @@
+<div>
+  <div>
+    <h3>ngIf</h3>
+    <div [hidden]="courses.length==0">
+      List of courses
+    </div>
+    <div [hidden]="courses.length>0">
+      No courses yet
+    </div>
+  </div>
+
+  <div>
+    <h3>ngSwitchCase</h3>
+    <div>
+      <ul class="nav nav-pills">
+        <li [class.active]="viewMode == 'map'"><a (click)="viewMode='map'">Map View</a></li>
+        <li [class.active]="viewMode == 'list'" ><a (click)="viewMode='list'">List View</a></li>
+      </ul>
+      <div [ngSwitch]="viewMode">
+        <div *ngSwitchCase="'map'">Map View Selected</div>
+        <div *ngSwitchCase="'list'">List View Selected</div>
+        <div *ngSwitchDefault>Nothing selected</div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <h3>ngFor</h3>
+    <div>
+      <button (click)="onAdd()">Add New Course</button>
+      <br/><br/>
+      <ul>
+        <li style="padding-bottom: 5px;" *ngFor="let course of courses; even as isEven, index as i">
+          <span style="display: inline-block; width:150px;">{{i}} - {{course.name}}</span> 
+          <!-- <span style="display: inline-block; width:100px;" [class.hidden]="!isEven">(EVEN)</span>  -->
+          <button (click)="onRemove(course)">Remove Course</button>
+          <button (click)="onChange(course)">Edit Name</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div>
+    <button (click)="onLoadAuthors()">Load Authors</button> <br><br>
+    <ul>
+      <li *ngFor="let author of authors; trackBy: trackAuthorsById"> 
+        <!-- here we are not calling the trackAuthorsById method, we are only specifying it, 
+        so that angular goes there and gets to know that it should track the object by id -->
+        {{author.name}}
+      </li>
+    </ul>
+  </div>
+
+  <div>
+    <h3>Safe Object Traversal</h3>
+    <div>
+      <h4>List of book authors:</h4>
+      <ul>
+        <li *ngFor="let book of books">
+          {{book.author?.name}}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div>
+    <h3>
+      Custom Directives
+    </h3>
+    <input type="text" appInputFormat [appInputFormat]="'uppercase'">
+  </div>
+
+  <div>
+    <zippy title="Shipping Details">
+      Shipping Details Content
+    </zippy>
+    <zippy title="Billing Details">
+      Billing Details Content
+    </zippy>
+  </div>
+</div>
