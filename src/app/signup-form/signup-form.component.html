@@ -1,0 +1,37 @@
+<form [formGroup]="form" (ngSubmit)="login()">
+    <div class="alert alert-danger" *ngIf="form.errors">
+        Invalid Login credentials
+    </div>
+    <div formGroupName="account">
+            <div class="form-group">
+                    <label for="username">Username</label>
+                    <input
+                        formControlName="username" 
+                        id="username" 
+                        type="text" 
+                        class="form-control">
+                    
+                        <!--loader to be shown while the results are being fetched from server-->
+                    <div *ngIf="username.pending">checking for uniqueness...</div>
+                        
+                    <!--here we cant define template vars to get hold of ngModel, so in the component
+                        we have defined a getter 'get username()' which fetches the username from 'form' from component
+                        and we are directly using it below in ngIf, we could have also directly used 'form.get('username').touched'-->
+                    <div class="alert alert-danger" *ngIf="username.touched && username.invalid">
+                        <div *ngIf="username.errors.required">Username is required</div>
+                        <div *ngIf="username.errors.minLength">Username should be longer than {{username.errors.minLength.requiredLength}} characters</div>
+                        <div *ngIf="username.errors.cannotContainSpace">Username can not contain space</div>
+                        <div *ngIf="username.errors.shouldBeUnique">Username is taken</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input
+                        formControlName="password" 
+                        id="password" 
+                        type="text" 
+                        class="form-control">
+                </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Sign Up</button>
+</form>
