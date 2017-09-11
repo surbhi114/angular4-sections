@@ -16,7 +16,16 @@ export class PasswordValidators {
 
     static shouldMatchNewPassword(formGroup: FormGroup): ValidationErrors | null {
         if(formGroup.controls.confirmPassword.value != formGroup.controls.newPassword.value)
+          {
+            //Your can also do it without creating form groups
+            //the control object is actually that would have been passed to this function 
+            //is actually the entire form object and we would just have to do the following:
+            //let newPassword = contol.get('newPassword');
+            //let confirmPassword = control.get('confirmPassword');
+            //then match the two
+
             return {shouldMatchNewPassword: true};
+          }  
         return(null);
     }
 }
