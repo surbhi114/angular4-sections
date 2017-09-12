@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
+import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { InputFormatDirective } from './input-format.directive';
@@ -9,6 +10,11 @@ import { CourseFormComponent } from './course-form/course-form.component';
 import { SignupFormComponent } from './signup-form/signup-form.component';
 import { NewCourseFromComponent } from './new-course-from/new-course-from.component';
 import { ChangePasswordFormComponent } from './change-password-form/change-password-form.component';
+import { PostsComponent } from './posts/posts.component';
+import { PostService } from "./services/post.service";
+import { AppErrorHandler } from "./common/app-error-handler";
+import { FollowersComponent } from './followers/followers.component';
+import { FollowersService } from "./services/followers.service";
 
 @NgModule({
   declarations: [
@@ -19,14 +25,25 @@ import { ChangePasswordFormComponent } from './change-password-form/change-passw
     ContactFormComponent,
     CourseFormComponent,
     NewCourseFromComponent,
-    ChangePasswordFormComponent
+    ChangePasswordFormComponent,
+    PostsComponent,
+    FollowersComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule
   ],
-  providers: [],
+  providers: [
+    PostService,
+    FollowersService,
+    //The below provider object means whereever ErrorHandler is used, use AppErrorHAndler
+    {
+      provide: ErrorHandler,
+      useClass: AppErrorHandler
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

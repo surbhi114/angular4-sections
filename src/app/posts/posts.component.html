@@ -1,0 +1,22 @@
+<p>
+  Getting response from server...
+</p>
+<div>
+    <input #title (keyUp.enter)="createPost(title)" type="text">
+</div>
+<ul class="list-group">
+  <li
+    *ngFor="let post of posts" 
+    class="list-group-item">
+    <button class="btn btn-warning btn-xs" 
+      (click)="updatePost(post)">
+      Update
+    </button>
+    <button class="btn btn-danger btn-xs" 
+    (click)="deletePost(post)">
+    Delete
+  </button>
+    {{ post.title }}
+</li>
+</ul>
+ 

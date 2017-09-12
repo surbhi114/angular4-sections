@@ -1,0 +1,21 @@
+<div>
+    <div class="form-group">
+        <label for="user">GIT Username</label>
+        <input type="text" class="form-control" #user 
+        id="user" (keyup.enter)="getFollowers(user)">
+      </div>
+      <div>
+        <ul class="list-unstyled">
+          <li *ngFor="let follower of followers" class="media">
+            <div class="media-left">    
+              <img class="media-object avatar" 
+              src="{{follower.avatar_url}}" alt="https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiiu9T706DWAhVY02MKHbe-CSQQjRwIBw&url=http%3A%2F%2Fwww.iconsdb.com%2Fgray-icons%2Fquestion-mark-icon.html&psig=AFQjCNEt4xiP6KSlukLQn9wmppBjq1yfiQ&ust=1505340342254842">
+            </div>
+            <div class="media-body">
+              <h5 class="mt-0 mb-1">{{follower.login}}</h5>
+              <a href="{{follower.html_url}}">{{follower.html_url}}</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+</div>
